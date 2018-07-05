@@ -75,6 +75,7 @@ else  # !dvm_make_debug_vm
   #LOCAL_CFLAGS += -DNDEBUG -DLOG_NDEBUG=1
   # "-O2" is redundant for device (release) but useful for sim (debug)
   #LOCAL_CFLAGS += -O2 -Winline
+  LOCAL_CFLAGS += -O3
   #LOCAL_CFLAGS += -DWITH_EXTRA_OBJECT_VALIDATION
   LOCAL_CFLAGS += -DDVM_SHOW_EXCEPTION=1
   # if you want to try with assertions on the device, add:
@@ -235,8 +236,8 @@ LOCAL_C_INCLUDES += \
 MTERP_ARCH_KNOWN := false
 
 ifeq ($(dvm_arch),arm)
-  #dvm_arch_variant := armv7-a
-  #LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp -mfpu=vfp
+  dvm_arch_variant := armv7-a
+  LOCAL_CFLAGS += -march=armv7-a -mcpu=cortex-a8 -mtune=cortex-a8 -mfloat-abi=softfp -mfpu=neon
   LOCAL_CFLAGS += -Werror
   MTERP_ARCH_KNOWN := true
 
